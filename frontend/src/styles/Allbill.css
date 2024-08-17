@@ -1,0 +1,78 @@
+/* Container for the All Bills page */
+.all-bills-container {
+    padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header section */
+.all-bills-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.all-bills-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: #333;
+    letter-spacing: 0.5px;
+    text-decoration: none; /* Ensure no underline */
+}
+
+/* Sort options */
+.sort-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.sort-options label {
+    margin-right: 10px;
+    font-weight: 600;
+    color: #333;
+}
+
+.sort-options select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Table for displaying bills */
+.bill-list {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+}
+
+.bill-list li {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bill-list li p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.bill-list li a {
+    text-decoration: none; /* Ensure no underline on links */
+    color: #007bff;
+    font-weight: 500;
+}
+
+.bill-list li a:hover {
+    text-decoration: underline; /* Add underline on hover for links */
+    color: #0056b3;
+}

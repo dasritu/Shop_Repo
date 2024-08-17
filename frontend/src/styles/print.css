@@ -1,0 +1,15 @@
+/* styles/print.css */
+@media print {
+    /* Hide the elements you don’t want to print */
+    .navbar, /* Assuming you have a navbar with this class */
+    .footer,
+    .sidebar {
+      display: none !important;
+    }
+  
+    /* Ensure the bill part is displayed properly */
+    .bill-container {
+      display: block;
+    }
+  }
+  

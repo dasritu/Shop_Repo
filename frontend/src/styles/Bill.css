@@ -1,0 +1,67 @@
+/* Bill.css */
+.bill-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.shop-info {
+  text-align: center;
+}
+
+.bill-header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.customer-details {
+  margin-bottom: 20px;
+}
+
+.customer-details label {
+  display: block;
+  margin: 5px 0;
+}
+
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.bill-table th, .bill-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.bill-table th {
+  background-color: #f4f4f4;
+}
+
+.bill-footer {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.print-button, .save-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.print-button {
+  background-color: #4CAF50;
+}
+
+.save-button {
+  background-color: #2196F3;
+}
