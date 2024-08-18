@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Line, Pie } from 'react-chartjs-2';
 import moment from 'moment';
-import 'chart.js/auto'; // Import Chart.js
 
 const HomePage = () => {
   const [dateTime, setDateTime] = useState(new Date());
-  const [categoryData, setCategoryData] = useState({});
   const [totalMachines, setTotalMachines] = useState(0);
+  const [categoryCounts, setCategoryCounts] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -18,47 +17,28 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    // Fetch data for the charts
     axios.get('https://shop-repo.onrender.com/api/machines')
       .then(response => {
         const machines = response.data;
 
         // Calculate total number of machines
-        setTotalMachines(machines.reduce((sum, machine) => sum + machine.quantity, 0));
+        const total = machines.reduce((sum, machine) => sum + machine.quantity, 0);
+        setTotalMachines(total);
 
-        // Calculate number of machines by category
-        const categoryCounts = machines.reduce((acc, machine) => {
+        // Calculate category-wise count
+        const counts = machines.reduce((acc, machine) => {
           acc[machine.category] = (acc[machine.category] || 0) + machine.quantity;
           return acc;
         }, {});
 
-        setCategoryData({
-          labels: Object.keys(categoryCounts),
-          datasets: [{
-            label: 'Total Machines by Category',
-            data: Object.values(categoryCounts),
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
-            borderColor: 'rgba(255, 255, 255, 0.3)',
-            borderWidth: 1,
-          }],
-        });
+        setCategoryCounts(counts);
+        setLoading(false);
       })
-      .catch(error => console.error('Error fetching machines:', error));
+      .catch(error => {
+        console.error('Error fetching machines:', error);
+        setLoading(false);
+      });
   }, []);
-
-  // Chart data for total machines added over time
-  const addedOverTimeData = {
-    labels: ['Total Machines'], // Single label
-    datasets: [
-      {
-        label: 'Total Machines Added',
-        data: [totalMachines], // Single data point
-        borderColor: '#007bff',
-        backgroundColor: 'rgba(0, 123, 255, 0.2)',
-        fill: true,
-      },
-    ],
-  };
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -67,31 +47,36 @@ const HomePage = () => {
         Welcome to the Machine Inventory System Dashboard. Here you can view the current status of your inventory.
       </p>
       
-      <div style={{ display: 'flex', justifyContent: 'space-around', margin: '2rem 0' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', margin: '2rem 0' }}>
         {/* Date and Time Display */}
-        <div style={{ flex: 1, textAlign: 'center' }}>
-          <h2>Current Date and Time</h2>
-          <p>{moment(dateTime).format('MMMM Do YYYY')}</p>
-          <p>{moment(dateTime).format('hh:mm:ss A')}</p>
+        <div style={{ flex: 1, padding: '1rem', backgroundColor: '#f4f4f4', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+          <h2 style={{ textAlign: 'center' }}>Current Date and Time</h2>
+          <p style={{ fontSize: '1.2rem', textAlign: 'center' }}>{moment(dateTime).format('MMMM Do YYYY')}</p>
+          <p style={{ fontSize: '1.5rem', fontWeight: 'bold', textAlign: 'center' }}>{moment(dateTime).format('hh:mm:ss A')}</p>
         </div>
 
         {/* Total Machines in Inventory */}
-        <div style={{ flex: 1, textAlign: 'center' }}>
-          <h2>Total Machines in Inventory</h2>
-          <p style={{ fontSize: '2rem', fontWeight: 'bold' }}>{totalMachines}</p>
-        </div>
-
-        {/* Total Machines by Category Chart */}
-        <div style={{ flex: 1, textAlign: 'center' }}>
-          <h2>Total Machines by Category</h2>
-          <Pie data={categoryData} />
+        <div style={{ flex: 1, padding: '1rem', backgroundColor: '#f4f4f4', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+          <h2 style={{ textAlign: 'center' }}>Total Machines in Inventory</h2>
+          <p style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center' }}>{loading ? 'Loading...' : totalMachines}</p>
         </div>
       </div>
 
-      {/* Total Machines Added Over Time Chart */}
-      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-        <h2>Total Machines Added</h2>
-        <Line data={addedOverTimeData} options={{ maintainAspectRatio: false }} />
+      {/* Category-wise Count */}
+      <div style={{ padding: '1rem', backgroundColor: '#f4f4f4', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+        <h2 style={{ textAlign: 'center' }}>Machine Count by Category</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {loading ? (
+            <p style={{ textAlign: 'center' }}>Loading...</p>
+          ) : (
+            Object.keys(categoryCounts).map(category => (
+              <div key={category} style={{ padding: '1rem', border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#fff' }}>
+                <h3 style={{ margin: '0' }}>{category}</h3>
+                <p style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{categoryCounts[category]}</p>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
