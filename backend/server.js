@@ -6,7 +6,13 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
+
+app.use(cors({
+  origin: 'https://quiet-macaron-259e1b.netlify.app', // Your frontend URL
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
+app.use(express.json());
 app.use(express.json());
 
 const machineRoutes = require('./routes/machines');

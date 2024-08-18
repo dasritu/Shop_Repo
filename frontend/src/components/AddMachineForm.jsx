@@ -15,7 +15,7 @@ const AddMachineForm = () => {
     e.preventDefault();
     const machine = { name, purchasePrice, purchaseDate, companyName, quantity, sellPrice, category };
 
-    axios.post('http://localhost:5000/api/machines/add', machine)
+    axios.post('https://shop-repo.onrender.com/api/machines/add', machine)
       .then(() => {
         setName('');
         setPurchasePrice('');

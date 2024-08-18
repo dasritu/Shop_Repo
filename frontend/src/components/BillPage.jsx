@@ -9,7 +9,7 @@ const BillPage = () => {
   const [customerPhone, setCustomerPhone] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/machines/cart/bill')
+    axios.get('https://shop-repo.onrender.com/api/machines/cart/bill')
       .then(response => {
         setBill(response.data);
         setError(null); // Clear previous errors
@@ -25,7 +25,7 @@ const BillPage = () => {
   };
 
   const handleDelete = (id, quantity) => {
-    axios.delete('http://localhost:5000/api/machines/cart/delete', { data: { id, quantity } })
+    axios.delete('https://shop-repo.onrender.com/api/machines/cart/delete', { data: { id, quantity } })
       .then(response => {
         if (response.status === 200) {
           setBill(prevBill => ({
@@ -54,7 +54,7 @@ const BillPage = () => {
   
     console.log('Saving bill with data:', dataToSave); // Log the data to be saved
   
-    axios.post('http://localhost:5000/api/machines/save', dataToSave)
+    axios.post('https://shop-repo.onrender.com/api/machines/save', dataToSave)
       .then(response => {
         alert('Bill saved successfully!');
         setError(null); // Clear previous errors

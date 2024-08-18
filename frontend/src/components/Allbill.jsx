@@ -11,7 +11,7 @@ const AllBills = () => {
   useEffect(() => {
     const fetchBills = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/bills');
+        const response = await axios.get('https://shop-repo.onrender.com/api/bills');
         setBills(response.data);
         setError(null); // Clear previous errors
       } catch (error) {

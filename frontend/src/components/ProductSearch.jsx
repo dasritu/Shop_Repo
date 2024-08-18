@@ -11,7 +11,7 @@ const ProductSearch = () => {
   const [selectedCategory, setSelectedCategory] = useState(''); // State to store selected category
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/machines')
+    axios.get('https://shop-repo.onrender.com/api/machines')
       .then(response => setMachines(response.data))
       .catch(error => console.error('Error fetching machines:', error));
   }, []);
@@ -28,7 +28,7 @@ const ProductSearch = () => {
     const qty = quantity[id] || 1;
     if (qty <= 0) return;
 
-    axios.post('http://localhost:5000/api/machines/cart/add', { id, quantity: qty })
+    axios.post('https://shop-repo.onrender.com/api/machines/cart/add', { id, quantity: qty })
       .then(() => {
         alert('Product added to cart');
         setMachines(prevMachines => 
@@ -47,7 +47,7 @@ const ProductSearch = () => {
   };
 
   const deleteMachine = (id) => {
-    axios.delete(`http://localhost:5000/api/machines/${id}`)
+    axios.delete(`https://shop-repo.onrender.com/api/machines/${id}`)
       .then(() => {
         alert('Machine deleted successfully');
         setMachines(prevMachines => prevMachines.filter(machine => machine._id !== id));

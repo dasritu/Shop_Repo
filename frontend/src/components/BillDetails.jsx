@@ -12,7 +12,7 @@ const BillDetails = () => {
   useEffect(() => {
     const fetchBillDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/bills/${id}`);
+        const response = await axios.get(`https://shop-repo.onrender.com/api/bills/${id}`);
         setBill(response.data);
         setError(null); // Clear previous errors
       } catch (error) {
