@@ -1,31 +1,48 @@
 /* src/components/Layout.css */
 .layout {
-    display: flex;
-  }
-  
-  .sidebar {
-    width: 200px;
-    background-color: #f4f4f4;
-    padding: 10px;
-    height: 100vh;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar a {
-    text-decoration: none;
-    color: #333;
-  }
-  
+  display: flex;
+}
+
+.sidebar {
+  width: 250px; /* Increased width for a more spacious look */
+  background: linear-gradient(135deg, #4e54c8, #8f94fb); /* Gradient background for visual interest */
+  padding: 20px; /* Increased padding for a more spacious feel */
+  height: 100vh;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
+  color: #fff; /* Light text color for better contrast */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 15px; /* Increased margin for better spacing */
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #fff; /* White text color for readability */
+  font-weight: bold; /* Bold text for emphasis */
+  display: block; /* Block display to increase click area */
+  padding: 10px 15px; /* Padding for better spacing */
+  border-radius: 5px; /* Rounded corners for links */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+}
+
+.sidebar a:hover {
+  background-color: #3b3b5c; /* Darker background on hover */
+  color: #f4f4f4; /* Lighter text color on hover */
+}
+
+.sidebar a.active {
+  background-color: #1a1a2e; /* Highlighted background for the active link */
+  color: #f4f4f4; /* Light text color for the active link */
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
