@@ -17,7 +17,12 @@
   padding: 0;
   margin: 0;
 }
-
+.sidebar h2{
+  font-size: 20px;
+    margin-bottom: 10px;
+    color: #fffdfd;
+    text-align: center;
+}
 .sidebar li {
   margin-bottom: 15px; /* Increased margin for better spacing */
 }
