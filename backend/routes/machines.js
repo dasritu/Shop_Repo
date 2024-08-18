@@ -7,14 +7,29 @@ let cart = []; // Consider using a database for cart persistence
 
 // Add a new machine
 router.post('/add', async (req, res) => {
-  const newMachine = new Machine(req.body);
   try {
+    const { name, purchasePrice, sellPrice, purchaseDate, companyName, quantity, category, product_code, purchased_from } = req.body;
+
+    const newMachine = new Machine({
+      name,
+      purchasePrice,
+      sellPrice,
+      purchaseDate,
+      companyName,
+      quantity,
+      category,
+      product_code,
+      purchased_from
+    });
+
     await newMachine.save();
-    res.status(201).json(newMachine);
-  } catch (err) {
-    res.status(400).json({ message: 'Error adding machine: ' + err.message });
+    res.status(201).json({ message: 'Machine added successfully' });
+  } catch (error) {
+    console.error('Error adding machine:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 
 // Get all machines

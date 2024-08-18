@@ -10,10 +10,22 @@ const AddMachineForm = () => {
   const [quantity, setQuantity] = useState('');
   const [sellPrice, setSellPrice] = useState(''); // Updated sellPrice state
   const [category, setCategory] = useState('power tools'); // Added category state with default value
+  const [productCode, setProductCode] = useState(''); // New field
+  const [purchasedFrom, setPurchasedFrom] = useState(''); // New field
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const machine = { name, purchasePrice, purchaseDate, companyName, quantity, sellPrice, category };
+    const machine = { 
+      name, 
+      purchasePrice, 
+      purchaseDate, 
+      companyName, 
+      quantity, 
+      sellPrice: sellPrice || 0, // Set default value if empty
+      category,
+      product_code: productCode, // New field
+      purchased_from: purchasedFrom // New field
+    };
 
     axios.post('https://shop-repo.onrender.com/api/machines/add', machine)
       .then(() => {
@@ -24,6 +36,8 @@ const AddMachineForm = () => {
         setQuantity('');
         setSellPrice(''); // Clear sellPrice
         setCategory('power tools'); // Reset category to default
+        setProductCode(''); // Clear productCode
+        setPurchasedFrom(''); // Clear purchasedFrom
         alert('Machine added successfully');
       })
       .catch((error) => console.error('Error adding machine:', error));
@@ -100,8 +114,7 @@ const AddMachineForm = () => {
               type="number" 
               value={sellPrice} 
               onChange={(e) => setSellPrice(e.target.value)} 
-              required 
-              className="input" 
+              className="input" // Make this field optional
             />
           </label>
         </div>
@@ -119,6 +132,30 @@ const AddMachineForm = () => {
               <option value="light">Light</option>
               <option value="pump and motors">Pump and Motors</option>
             </select>
+          </label>
+        </div>
+        <div className="form-group">
+          <label className="label">
+            Product Code:
+            <input 
+              type="text" 
+              value={productCode} 
+              onChange={(e) => setProductCode(e.target.value)} 
+              required 
+              className="input" 
+            />
+          </label>
+        </div>
+        <div className="form-group">
+          <label className="label">
+            Purchased From:
+            <input 
+              type="text" 
+              value={purchasedFrom} 
+              onChange={(e) => setPurchasedFrom(e.target.value)} 
+              required 
+              className="input" 
+            />
           </label>
         </div>
         <button type="submit" className="button">Add Machine</button>
