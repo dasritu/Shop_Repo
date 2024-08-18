@@ -61,8 +61,10 @@ const ProductSearch = () => {
       });
   };
 
+  // Filter machines by name or company name and selected category
   const filteredMachines = machines.filter(machine =>
-    machine.name.toLowerCase().includes(search.toLowerCase()) &&
+    (machine.name.toLowerCase().includes(search.toLowerCase()) ||
+     machine.companyName.toLowerCase().includes(search.toLowerCase())) &&
     (selectedCategory === '' || machine.category === selectedCategory)
   );
 
@@ -72,7 +74,7 @@ const ProductSearch = () => {
       <div className="filters">
         <input
           type="text"
-          placeholder="Search by name"
+          placeholder="Search by name or company"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="search-input"
@@ -93,7 +95,8 @@ const ProductSearch = () => {
           <tr>
             <th>Name</th>
             <th>Purchase Price</th>
-            <th>Sell Price</th>
+            <th>Product Code</th> {/* Changed from Sell Price */}
+            <th>Purchased From</th> {/* New column */}
             <th>Company</th>
             <th>Category</th>
             <th>Quantity</th>
@@ -106,7 +109,8 @@ const ProductSearch = () => {
             <tr key={machine._id}>
               <td>{machine.name}</td>
               <td>₹{machine.purchasePrice}</td>
-              <td>₹{machine.sellPrice}</td>
+              <td>{machine.product_code}</td> {/* Added product code */}
+              <td>{machine.purchased_from}</td> {/* Added purchased from */}
               <td>{machine.companyName}</td>
               <td>{machine.category}</td>
               <td>{machine.quantity}</td>
