@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 
@@ -15,7 +16,8 @@ const billRoutes = require('./routes/billRouter');
 app.use('/api/bills', billRoutes);
 
 // Connect to MongoDB
-const uri = 'mongodb+srv://rituparnadas:dasritu@cluster0.vlwdlmh.mongodb.net/shopDB?retryWrites=true&w=majority'; // Replace with your MongoDB URI
+
+const uri = process.env.MONGODB_URI; // Replace with your MongoDB URI
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log('MongoDB connection error:', err));
